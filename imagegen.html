@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    h1 {
+        margin-top: 20vh;
+    }
+
+    button {
+        margin: 1rem;
+    }
+
+    #in {
+        width: 20vw;
+        height: 2vw;
+    }
+</style>
+
+<body>
+    <div id="container">
+        <h1>Generate Image using AI</h1>
+
+        <h3>Enter the text in the below box and get the related image:</h3>
+
+        <div style="display: flex; margin-top: 5vh; align-items: center; justify-content: center;">
+            <input type="text" id="in" placeholder="Enter some text...">
+
+            <button id="generate-button">Generate</button>
+        </div>
+
+        <div id="images-visible" class="image-container">
+            <p id="imageContainerText"></p>
+            <img id="generated-image" class="my-generated-image" src='' alt="AI Generated Image">
+        </div>
+    </div>
+
+    <script>
+        let generateImageForm = document.getElementById('container');
+        let formInput = document.getElementById('in');
+        let imageContainerText = document.getElementById('imageContainerText');
+        let imageGenerated = document.getElementById('generated-image');
+        let imageContainer = document.getElementById('images-visible');
+
+        async function fetchImages(category) {
+            try {
+                // Replace 'use a API' with the actual API endpoint
+                let response = await fetch('https://example.com/api/endpoint');
+
+                if (!response.ok) {
+                    throw new Error('Unable to fetch the data');
+                }
+
+                imageContainerText.innerText = "Below is your generated Image:";
+                imageContainer.style.display = "block";
+                imageGenerated.src = response.url;
+                console.log(response.url);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        generateImageForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let enteredText = formInput.value;
+            if (enteredText !== "") {
+                fetchImages(enteredText);
+            } else {
+                imageContainerText.innerText = "Input field cannot be empty!";
+            }
+        });
+    </script>
+</body>
+
+</html>

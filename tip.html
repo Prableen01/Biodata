@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tip Calculator</title>
+</head>
+<style>
+    body{
+        background-color: rgb(228, 235, 213);
+        color: black;
+    }
+    #container{
+        margin-top: 10vh;
+        margin-left: 10vw;
+    }
+
+    div{
+        padding: 1rem 0;
+    }
+    
+</style>
+<body>
+    <div id="container">
+        <h1 style="color: rgb(86, 115, 28);">Tip Calculator</h1>
+
+        <div>
+            <label for="bill">Bill Amount:</label>
+            <input type="number" name="bill" id="bill" style="background-color: rgb(249, 255, 238);border: whitesmoke;"required>
+        </div>
+
+        <div>
+            <label for="service">How was the service?</label>
+            <select name="service" id="service" style="background-color: rgb(249, 255, 238);border: whitesmoke;" required>
+                <option value="0.25">25% - Top Notch</option>
+                <option value="0.20">20% - Excellent</option>
+                <option value="0.15">15% - Good</option>
+                <option value="0.10">10% - Bad</option>
+                <option value="0.05">5% - Worst</option>
+            </select>
+        </div>
+        
+        <div>
+            <label for="persons">Total Number of Persons:</label>
+            <input type="number" id="persons" style="background-color: rgb(249, 255, 238);border: whitesmoke;">
+        </div>
+
+        <button onclick="tip()" style="background-color: rgb(133, 200, 0); border: whitesmoke;width: 20vh;height: 4vh;font-size: medium;border-radius: 5px;cursor: pointer;">Calculate</button>
+
+        <div id="show"></div>
+    </div>
+
+    <script>
+        function tip(){
+            let show = document.getElementById("show");
+            let bill = parseFloat(document.querySelector("#bill").value);
+            let persons = parseFloat(document.querySelector("#persons").value);
+            let opt = parseFloat(document.querySelector("#service").value);
+            let t = (opt * bill) / persons;
+
+            if(isNaN(bill) || isNaN(persons) || isNaN(opt)) {
+                show.innerHTML = `Enter valid values !`;
+                show.style.color="red";
+            }
+            else if(persons === 1){
+                show.innerHTML = `Tip is ${t.toFixed(2)}`;
+            }
+            else {
+                show.innerHTML = `Tip is ${t.toFixed(2)} per person`;
+            }
+        }
+    </script>
+</body>
+</html>

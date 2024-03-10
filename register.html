@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cash Register</title>
+    <style>
+        body{
+           background-color: rgb(245, 239, 232);
+            font-size: large;
+        }
+        .container {
+           margin-top: 10vh;
+            text-align: center;
+        }
+        label{
+            margin-top: 2vh;
+        }
+
+        table {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+        .in{
+            margin-top: 2vh;
+        }
+        button{
+            font-weight: 5000;
+            
+            margin: 3vh;
+            border: whitesmoke;
+            border-radius: 5px;
+            width: 20vh;
+            height: 4vh;
+            cursor: pointer;
+            color: rgb(82, 53, 7);
+            background-color: rgb(250, 219, 183) ;
+            box-shadow: 2px 2px 2px 0px rgb(82, 53, 7);
+
+        }
+        #show{
+            margin-top: 4vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="color: rgb(79, 36, 3);">Cash Register Box</h1>
+
+        <div class="in">
+            <label for="bill">Enter the amount of Bill:</label>
+            <input type="number" id="bill">
+        </div>
+
+        <div class="in">
+            <label for="given">Enter the amount given by customer:</label>
+            <input type="number" id="given">
+        </div>
+
+        <button onclick="check()"><b>Check</b></button>
+
+        <table>
+            <tr>
+                <th>No of Notes</th>
+                <td id="note500"></td>
+                <td id="note100"></td>
+                <td id="note50"></td>
+                <td id="note20"></td>
+                <td id="note10"></td>
+                <td id="note5"></td>
+                <td id="note2"></td>
+                <td id="note1"></td>
+            </tr>
+
+            <tr>
+                <th>Notes</th>
+                <td>500</td>
+                <td>100</td>
+                <td>50</td>
+                <td>20</td>
+                <td>10</td>
+                <td>5</td>
+                <td>2</td>
+                <td>1</td>
+            </tr>
+        </table>
+
+        <div id="show"></div>
+    </div>
+
+    <script>
+        function check(){
+            let bill = parseInt(document.getElementById("bill").value);
+            let given = parseInt(document.getElementById("given").value);
+            let ans = given - bill;
+            let show = document.getElementById("show");
+
+            if(isNaN(bill)|| isNaN(given)){
+                show.innerHTML=`Enter Valid Input !`;
+                show.style.color="red";
+            }
+            else if(ans < 0){
+                ans=ans*(-1);
+                show.innerHTML = `Give me ${ans} rupees more`;
+            } else {
+                document.getElementById("note500").innerHTML = Math.floor(ans / 500);
+                ans = ans % 500;
+                document.getElementById("note100").innerHTML = Math.floor(ans / 100);
+                ans = ans % 100;
+                document.getElementById("note50").innerHTML = Math.floor(ans / 50);
+                ans = ans % 50;
+                document.getElementById("note20").innerHTML = Math.floor(ans / 20);
+                ans = ans % 20;
+                document.getElementById("note10").innerHTML = Math.floor(ans / 10);
+                ans = ans % 10;
+                document.getElementById("note5").innerHTML = Math.floor(ans / 5);
+                ans = ans % 5;
+                document.getElementById("note2").innerHTML = Math.floor(ans / 2);
+                ans = ans % 2;
+                document.getElementById("note1").innerHTML = ans;
+            }
+        }
+    </script>
+</body>
+</html>

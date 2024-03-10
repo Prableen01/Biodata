@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Document</title>
+</head>
+<style>
+ body {
+    color: rgb(108, 62, 17);
+    overflow: hidden;
+    background-image: url(books-5937823_640.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0%;
+    padding: 0%;
+}
+
+.container{
+    
+    margin-top: 20vh;
+    margin-left: 10vh;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+}
+div{
+    margin-top: 2vh;
+}
+button{
+    background-color:  rgb(249, 240, 230);
+    color:  rgb(69, 45, 21);
+   border-color: whitesmoke;
+   border-radius: 5px;
+    width: 10vh;
+    height: 4vh;
+    margin:  2vh  13vh;
+    font-size: medium;
+    box-shadow: rgb(108, 62, 17);;
+}
+
+h1{
+   
+    color:  rgb(69, 45, 21);
+}
+</style>
+<body>
+    <div class="container">
+    <h1>GRADE CALCULATOR</h1>
+    <div>
+        <label for="maths">Enter marks in Maths:</label>
+        <input type="number" id="maths"> </input>
+    </div>
+
+    <div>
+        <label for="english">Enter the marks in English:</label>
+        <input type="number" id="english"> </input>
+    </div>
+
+    <div>
+        <label for="physics">Enter the marks in physics:</label>
+        <input type="number" id="physics"></number>
+    </div>
+
+    <div>
+        <label for="Chemistry">Enter the marks in Chemistry:</label>
+        <input type="number" id="Chemistry">
+    </div>
+    
+
+    <button onclick= calculate()>Calculate</button>
+
+    <div id="showdata"></div>
+    </div>
+
+
+    <script>
+        
+let  calculate = () => { 
+
+let maths =document.querySelector("#maths").value;
+let physics =document.querySelector("#physics").value;
+let english =document.querySelector("#english").value;
+let chem=document.querySelector("#Chemistry").value;
+
+let tmarks= parseFloat(maths)+parseFloat(physics)+parseFloat(english)+parseFloat(chem);
+let ans= tmarks/4;
+
+let grade;
+
+
+ if(ans<=100 && ans>90) grade='A';
+else if(ans<=90 && ans>80) grade='B';
+else if(ans<=80 && ans>70) grade='C';
+else if(ans<=70 && ans>60) grade='D';
+else grade='F';
+
+let show = document.querySelector("#showdata");
+
+if(isNaN(parseFloat(maths)) || isNaN(parseFloat(physics)) || isNaN(parseFloat(english)) || isNaN(parseFloat(chem))){
+                show.innerHTML=`Enter valid input !`;
+                show.style.color="red";
+            }
+else if (ans > 60) {
+show.innerHTML = `You have got ${ans}% marks. Your grade is ${grade}. You are pass.`;
+show.style.color="green";
+} else {
+show.innerHTML = `You have got ${ans}% marks. Your grade is ${grade}. You are fail.`;
+show.style.color="black";
+}
+
+
+}
+    </script>
+</html>

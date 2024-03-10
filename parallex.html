@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parallex</title>
+</head>
+<style>
+    body {
+        font-size: 300%;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+
+    }
+
+    .container{
+        background-color: rgb(209, 162, 221);
+        position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+    }
+
+    #i1{
+        position: absolute;
+        top: 80px;
+            left: 80px;
+            height: 250px;
+            width: 250px;
+    }
+
+    #i2{
+        position: absolute;
+        bottom: 80px;
+            right: 80px;
+            height: 250px;
+            width: 250px;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <img src="f1.jpeg" alt="Flower" id="i1" class="img" value="2">
+
+        <h1>FLOWERS</h1>
+
+        <img src="f2.jpeg" alt="Flower" id="i2" class="img" value="-2">
+
+    </div>
+
+    <script>
+    
+        document.addEventListener("mousemove", move);
+        function move(event) {
+            this.querySelectorAll(".img").forEach((shift) => {
+                const position = shift.getAttribute("value");
+                const x = (window.innerWidth - event.pageX * position) / 90;
+                const y = (window.innerHeight - event.pageY * position) / 90;
+ 
+                shift.style.transform = `translateX(${x}px) translateY(${y}px)`;
+            });
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text To Speech</title>
+</head>
+<style>
+    body{
+        font: 200%;
+
+        margin: 0%;
+        padding: 0%;
+    }
+    .container {
+        color: white;
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(to right,rgb(13, 13, 141),rgb(121, 13, 164),rgb(157, 3, 93));
+        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    textarea {
+        background-color: #3f464a52;
+        color: aliceblue;
+        resize: none;
+        margin-top: 5vh;
+        height: 40vh;
+        overflow-y: scroll;
+        border: 2px solid black;
+        border-radius: 5px;
+    }
+
+    h3 {
+        margin-top: 5vh;
+    }
+
+    h1{
+        margin-top: 10vh;
+    }
+    button {
+        
+        background:linear-gradient(to right,orange,yellow);
+        margin-top: 2vh;
+    }
+
+    .error-para {
+        color: red;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h1>Text To Speech converter</h1>
+        <h3>Enter any text and change it into speech with one click!</h3>
+
+        <textarea name="speech" id="speech" cols="150" rows="10"></textarea>
+        <p class="error-para"></p>
+        <button id="button">Play Converted Sound</button>
+    </div>
+
+    <script>
+        const text = document.getElementById("speech");
+        const btn = document.getElementById("button");
+
+        btn.addEventListener('click', function () {
+            const synth = window.speechSynthesis;
+            const enteredText = text.value;
+            const error = document.querySelector('.error-para');
+
+            if (!synth.speaking && !enteredText.trim().length) {
+                error.textContent = "Nothing to Convert! Enter text in the text area.";
+            } else {
+                error.textContent = "";
+                const newUtter = new SpeechSynthesisUtterance(enteredText);
+                synth.speak(newUtter);
+                btn.textContent = "Sound is Playing...";
+
+                newUtter.onend = function () {
+                    btn.textContent = "Play Converted Sound";
+                };
+            }
+        });
+    </script>
+</body>
+
+</html>

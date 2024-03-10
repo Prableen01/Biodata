@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    body {
+        background-color: lavenderblush;
+        font-size: large;
+    }
+
+    #container {
+        
+        margin-top: 20vh;
+        margin-left: 10vw;
+    }
+
+    #container div {
+        padding: 1rem;
+    }
+
+    button {
+        border-color: whitesmoke;
+        margin-left: 10rem;
+        width: 5vw;
+        height: 30px;
+        background-color: rgb(255, 210, 225);
+    }
+</style>
+
+<body>
+    <div id="container">
+        <h1 style="color: rgb(255, 54, 121);">BMI CALCULATOR</h1>
+
+        <div>
+            <label for="w" >Enter the weight in kg:</label>
+            <input type="number" name="w" id="w">
+        </div>
+
+        <div>
+            <label for="h">Enter the height in metres:</label>
+            <input type="number" name="h" id="h">
+        </div>
+
+        <button onclick="show_data()">Submit</button>
+
+        <div id="showdata"></div>
+    </div>
+
+    <script>
+        function show_data() {
+            let show = document.getElementById("showdata");
+            let w = parseFloat(document.querySelector("#w").value);
+            let h = parseFloat(document.querySelector("#h").value);
+
+            let bmi = w / (h*h);
+            
+            if(isNaN(w) || isNaN(h)){
+                show.innerHTML=`Enter valid input !`;
+                show.style.color="red";
+            }
+            else if (bmi < 18.5) {
+                show.innerHTML = `Your BMI is ${bmi.toFixed(2)}. You are underweight`;
+            } else if (bmi >= 18.5 && bmi < 25) {
+                show.innerHTML = `Your BMI is ${bmi.toFixed(2)}. You are under normal range`;
+            } else if (bmi >= 25 && bmi < 30) {
+                show.innerHTML = `Your BMI is ${bmi.toFixed(2)}. You are overweight`;
+            } else {
+                show.innerHTML = `Your BMI is ${bmi.toFixed(2)}. You are obese`;
+            }
+        }
+    </script>
+</body>
+
+</html>
